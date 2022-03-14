@@ -1,5 +1,3 @@
-
-
 import BundlePricingDomain._
 
 import scala.util.{Failure, Try}
@@ -22,9 +20,6 @@ class BundlePricingService(catalog: Seq[CatalogItem], bundlePromotions: Seq[Bund
       Applied(a2.cart, Price(a2.total.value + total.value))
     }
   }
-
-
-
 
   def bundleCartToLowestPrice(cart: Cart): Try[Price] = {
     isCartValid(cart) match {
@@ -50,10 +45,8 @@ class BundlePricingService(catalog: Seq[CatalogItem], bundlePromotions: Seq[Bund
       filter(_.value>0).minBy(_.value)
   }
 
-
   def cartItemPrice(item: CartItem): Price =
     Price(item.quantity.value*item.catalogItem.unitPrice.value)
-
 
   def chainPromo(promo: BundlePromotion, previousChain: Applied): Applied = {
     val currentApplied = promo match {
@@ -63,8 +56,6 @@ class BundlePricingService(catalog: Seq[CatalogItem], bundlePromotions: Seq[Bund
     val newTotal = currentApplied.total.value + previousChain.total.value
     Applied(currentApplied.cart, Price(newTotal))
   }
-
-
 
   def applyTPD(p: BundlePromotions.BundleTotalPriceDiscount, cart: Seq[CartItem]): Applied = {
 
@@ -90,7 +81,6 @@ class BundlePricingService(catalog: Seq[CatalogItem], bundlePromotions: Seq[Bund
         }
       case _ :: t => loop(t, i+1)
     }
-
     loop(cart, 0)
   }
 
@@ -111,10 +101,6 @@ class BundlePricingService(catalog: Seq[CatalogItem], bundlePromotions: Seq[Bund
 
   def foundItem(c: CartItem, promo: Seq[CartItem]): Boolean =
     promo.contains(c)
-
-
-
-
 
   def remove(item: CartItem, cart: Seq[CartItem]): Seq[CartItem] = {
     // remove as many as it needs...
@@ -139,10 +125,8 @@ class BundlePricingService(catalog: Seq[CatalogItem], bundlePromotions: Seq[Bund
     case Nil => Applied(cart, price)
     case h :: t => applyFoundOnUnit(t, remove(h,cart), price)
   }
-
-
+  
   def exists(item: CartItem)= catalog.contains(item.catalogItem)
-
 
   def isCartValid(cart: Cart): Boolean = {
     cart.cartItems.foreach{
@@ -150,6 +134,4 @@ class BundlePricingService(catalog: Seq[CatalogItem], bundlePromotions: Seq[Bund
     }
     true
   }
-
 }
-
