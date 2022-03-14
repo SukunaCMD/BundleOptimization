@@ -50,27 +50,6 @@ class BundlePricingService(catalog: Seq[CatalogItem], bundlePromotions: Seq[Bund
       filter(_.value>0).minBy(_.value)
   }
 
-  def optimizePrice2(cart: Cart): Price = {
-
-    val permutations = bundlePromotions.permutations
-    val costs = permutations.map { allPromos =>
-      val emptyApplied = Applied(cart.cartItems, Price(0))
-
-      val allAppliedPromos = allPromos.foldRight(emptyApplied){ (curPromo, existingAppliedPromos) =>
-        chainPromo(curPromo, existingAppliedPromos)
-      }
-      val total = allAppliedPromos.total
-
-
-      allAppliedPromos.cart.foldRight(total){(a,b) =>
-        val curCartItemPrice = cartItemPrice(a)
-
-        Price(curCartItemPrice.value + b.value)
-      }
-    }
-    costs.filter(_.value>0).minBy(_.value)
-  }
-
 
   def cartItemPrice(item: CartItem): Price =
     Price(item.quantity.value*item.catalogItem.unitPrice.value)
