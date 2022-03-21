@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Bundle-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Bundle-build.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/BundleOpt.iml" filepath="$PROJECT_DIR$/.idea/modules/BundleOpt.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Stupid.iml" filepath="$PROJECT_DIR$/.idea/modules/Stupid.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Stupid-build.iml" filepath="$PROJECT_DIR$/.idea/modules/Stupid-build.iml" />
     </modules>
   </component>
 </project>
